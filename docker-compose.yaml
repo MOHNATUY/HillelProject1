@@ -3,7 +3,7 @@ version: "3.8"
 services:
   documentation:
     image: squidfunk/mkdocs-material:latest
-    container_name: mkdocs_junior
+    container_name: mkdocs
     command: serve --dev-addr=0.0.0.0:8011 --watch-theme
     restart: unless-stopped
     ports:
