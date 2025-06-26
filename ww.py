@@ -1,10 +1,1 @@
-
-
-
-
-import json
-
-
-
-
-print (qwe)
+print(qwe)
