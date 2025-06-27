@@ -7,6 +7,28 @@ services:
     command: serve --dev-addr=0.0.0.0:8011 --watch-theme
     restart: unless-stopped
     ports:
-      - "8100:8011"
+      - "8012:8012"
     volumes:
       - ./documentation:/docs:ro
+
+  database:
+    image: postgres:16-alpine
+    container_name: database
+    hostname: database
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5433:${POSTGRES_PORT}"
+    volumes:
+      - postgres_datastorage:/var/lib/postgresgl/data
+    networks:
+      - main_network
+
+networks:
+  main_network:
+    driver: bridge
+
+volumes:
+  postgres_datastorage:
+    external: false
