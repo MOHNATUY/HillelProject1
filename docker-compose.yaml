@@ -25,6 +25,25 @@ services:
     networks:
       - main_network
 
+  backend_api:
+    build:
+      dockerfile: Dockerfile
+      context: ./backend_api
+    container_name: backend_api
+    hostname: backend_api
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "2323:2323"
+    command: |
+      sh -c "
+      uvicorn main:app --port=2323 --host=0.0.0.0 --reload
+      "
+    networks:
+      - main_network
+
+
 networks:
   main_network:
     driver: bridge
