@@ -4,10 +4,10 @@ services:
   documentation:
     image: squidfunk/mkdocs-material:latest
     container_name: mkdocs
-    command: serve --dev-addr=0.0.0.0:8011 --watch-theme
+    command: serve --dev-addr=0.0.0.0:8014 --watch-theme
     restart: unless-stopped
     ports:
-      - "8012:8012"
+      - "8014:8014"
     volumes:
       - ./documentation:/docs:ro
 
