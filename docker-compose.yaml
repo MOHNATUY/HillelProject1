@@ -34,6 +34,8 @@ services:
     restart: always
     env_file:
       - .env
+    volumes:
+      - ./backend_api/app:/app
     ports:
       - "2323:2323"
     command: |
