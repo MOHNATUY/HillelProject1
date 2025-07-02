@@ -1,6 +1,5 @@
-from fastapi import FastAPI
-
 from applications.users.router import router_users
+from fastapi import FastAPI
 from settings import settings
 
 
