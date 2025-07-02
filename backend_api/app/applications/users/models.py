@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from applications.database.base_models import Base
+from database.base_models import Base
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.sql import func
