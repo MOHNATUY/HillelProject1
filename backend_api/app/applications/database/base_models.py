@@ -1,6 +1,4 @@
-from sqlalchemy.orm import DeclarativeBase, declarative_base
-
-from settings import settings
+from sqlalchemy.orm import DeclarativeBase
 
 
 class Base(DeclarativeBase):
