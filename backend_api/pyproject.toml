@@ -6,9 +6,16 @@ authors = [
     {name = "Arthur Danilin",email = "mohnatuy0@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
-    "fastapi[all] (>=0.115.14,<0.116.0)"
+    "fastapi[all] (>=0.115.14,<0.116.0)",
+    "alembic (>=1.16.2,<2.0.0)",
+    "sqlalchemy (>=2.0.41,<3.0.0)",
+    "asyncpg (>=0.30.0,<0.31.0)",
+    "psycopg2-binary (>=2.9.10,<3.0.0)",
+    "black (>=25.1.0,<26.0.0)",
+    "isort (>=6.0.1,<7.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)"
 ]
 
 
@@ -17,4 +24,4 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-package-mode = false
+
