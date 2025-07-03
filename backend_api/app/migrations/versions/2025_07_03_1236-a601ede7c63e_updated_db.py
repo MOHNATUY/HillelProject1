@@ -34,9 +34,7 @@ def upgrade() -> None:
         sa.Column("images", postgresql.ARRAY(sa.String()), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(
-        op.f("ix_products_description"), "products", ["description"], unique=False
-    )
+    op.create_index(op.f("ix_products_description"), "products", ["description"], unique=False)
     op.create_index(op.f("ix_products_title"), "products", ["title"], unique=False)
     op.add_column("users", sa.Column("is_admin", sa.Boolean(), nullable=True))
     op.add_column("users", sa.Column("is_verified", sa.Boolean(), nullable=True))
