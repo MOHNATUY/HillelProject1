@@ -9,6 +9,6 @@ def get_application() -> FastAPI:
     app = FastAPI(debug=settings.DEBUG)
     app.include_router(router)
 
-    app.mount('/static', StaticFiles(directory='static'), name='static')
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
     return app

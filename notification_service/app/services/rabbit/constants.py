@@ -5,8 +5,8 @@ from services.rabbit.handlers import register_user, user_added_product_to_cart
 
 
 class SupportedQueues(StrEnum):
-    USER_REGISTRATION = 'user_registration'
-    USER_ADDED_PRODUCT_TO_CART = 'user_added_product_to_cart'
+    USER_REGISTRATION = "user_registration"
+    USER_ADDED_PRODUCT_TO_CART = "user_added_product_to_cart"
 
     @classmethod
     def get_queues(cls) -> list[str]:
@@ -16,6 +16,6 @@ class SupportedQueues(StrEnum):
     def get_handler(cls, queue_name: Self) -> Callable:
         handlers_map = {
             cls.USER_REGISTRATION: register_user,
-            cls.USER_ADDED_PRODUCT_TO_CART: user_added_product_to_cart
+            cls.USER_ADDED_PRODUCT_TO_CART: user_added_product_to_cart,
         }
         return handlers_map[queue_name]

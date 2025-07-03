@@ -14,8 +14,10 @@ class RabbitMQBroker:
             host=settings.RMQ_HOST,
             port=settings.RMQ_PORT,
             virtual_host=settings.RMQ_VIRTUAL_HOST,
-            credentials=pika.PlainCredentials(username=settings.RMQ_USER, password=settings.RMQ_PASSWORD),
-            ssl_options=pika.SSLOptions(context=ssl_context)
+            credentials=pika.PlainCredentials(
+                username=settings.RMQ_USER, password=settings.RMQ_PASSWORD
+            ),
+            ssl_options=pika.SSLOptions(context=ssl_context),
         )
 
     def get_connection(self) -> pika.BlockingConnection:
@@ -29,16 +31,20 @@ class RabbitMQBroker:
                 message_json_str = json.dumps(message)
 
                 channel.basic_publish(
-                    exchange='',
-                    routing_key=queue_name,
-                    body=message_json_str.encode()
+                    exchange="", routing_key=queue_name, body=message_json_str.encode()
                 )
 
-    def setup_queues(self, channel: pika.adapters.blocking_connection.BlockingChannel, queues: list[str]):
+    def setup_queues(
+        self,
+        channel: pika.adapters.blocking_connection.BlockingChannel,
+        queues: list[str],
+    ):
         for queue in queues:
             channel.queue_declare(queue=queue, durable=True)
 
-    def consume_message(self, channel: pika.adapters.blocking_connection.BlockingChannel):
+    def consume_message(
+        self, channel: pika.adapters.blocking_connection.BlockingChannel
+    ):
         queues = SupportedQueues.get_queues()
         self.setup_queues(channel, queues)
         print(5555555555)
@@ -51,7 +57,6 @@ class RabbitMQBroker:
             )
 
         channel.start_consuming()
-
 
 
 rabbitmq_broker = RabbitMQBroker()

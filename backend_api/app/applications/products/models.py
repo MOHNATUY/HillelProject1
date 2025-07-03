@@ -23,4 +23,4 @@ class Product(Base):
     images: Mapped[list[str]] = mapped_column(ARRAY(String), default=list)
 
     def __str__(self):
-        return f'Product {self.title} - {self.id}'
+        return f"Product {self.title} - {self.id}"

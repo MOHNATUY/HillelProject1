@@ -13,7 +13,7 @@ from database.session_dependencies import get_async_session
 router_auth = APIRouter()
 
 
-@router_auth.post('/login')
+@router_auth.post("/login")
 async def user_login(
     data: OAuth2PasswordRequestForm = Depends(),
     session: AsyncSession = Depends(get_async_session),
@@ -23,7 +23,5 @@ async def user_login(
 
 
 @router_auth.get("/get-my-info")
-async def get_my_info(
-    user: User = Depends(get_current_user)
-) -> BaseUserInfo:
+async def get_my_info(user: User = Depends(get_current_user)) -> BaseUserInfo:
     return user
