@@ -1,12 +1,11 @@
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
+import jwt
 from applications.auth.password_handler import PasswordEncrypt
 from applications.users.crud import get_user_by_email
-from settings import settings
-from fastapi import Depends, HTTPException, status
+from fastapi import HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-import jwt
-
+from settings import settings
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

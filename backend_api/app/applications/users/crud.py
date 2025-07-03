@@ -1,12 +1,8 @@
-import uuid
-
-from fastapi import HTTPException
-
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
-
 from applications.auth.password_handler import PasswordEncrypt
 from applications.users.models import User
+from fastapi import HTTPException
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 async def create_user_in_db(email, name, password, session: AsyncSession) -> User:

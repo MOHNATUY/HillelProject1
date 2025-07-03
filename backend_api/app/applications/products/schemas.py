@@ -1,7 +1,7 @@
 from enum import StrEnum
+from typing import Annotated, Optional
 
 from pydantic import BaseModel, Field
-from typing import Annotated, Optional
 
 
 class ProductSchema(BaseModel):

@@ -1,12 +1,11 @@
 import uuid
 from datetime import datetime
-from sqlalchemy.dialects.postgresql import ARRAY
-
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.sql import func
 
 from database.base_models import Base
+from sqlalchemy import String
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.sql import func
 
 
 class Product(Base):

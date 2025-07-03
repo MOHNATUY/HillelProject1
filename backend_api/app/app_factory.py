@@ -1,11 +1,9 @@
-from fastapi import FastAPI
-
-from applications.auth.router import router_auth
-from applications.users.router import router_users
-from applications.products.router import products_router
-from settings import settings
-
 import sentry_sdk
+from applications.auth.router import router_auth
+from applications.products.router import products_router
+from applications.users.router import router_users
+from fastapi import FastAPI
+from settings import settings
 
 sentry_sdk.init(
     dsn=settings.SENTRY,

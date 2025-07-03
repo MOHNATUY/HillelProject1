@@ -1,8 +1,8 @@
-import pika
+import json
 import ssl
 
+import pika
 from settings import settings
-import json
 
 
 class RabbitMQBroker:

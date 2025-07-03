@@ -1,11 +1,9 @@
-from typing import Annotated
-from fastapi import Depends
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import asc, desc, select, func, or_, and_
 import math
 
 from applications.products.models import Product
-from applications.products.schemas import SearchParamsSchema, SortEnum, SortByEnum
+from applications.products.schemas import SearchParamsSchema, SortByEnum, SortEnum
+from sqlalchemy import and_, asc, desc, func, or_, select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 async def create_product_in_db(

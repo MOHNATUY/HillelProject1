@@ -1,6 +1,5 @@
 import aioboto3
 from fastapi import UploadFile
-
 from settings import settings
 
 

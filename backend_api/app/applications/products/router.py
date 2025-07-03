@@ -1,26 +1,17 @@
-from typing import Annotated
-
-from fastapi import APIRouter, Body, UploadFile, Depends, HTTPException, status
 import uuid
+from typing import Annotated
 
 from applications.auth.security import admin_required
 from applications.products.crud import (
     create_product_in_db,
-    get_products_data,
     get_product_by_pk,
+    get_products_data,
 )
 from applications.products.schemas import ProductSchema, SearchParamsSchema
-from applications.users.models import User
+from database.session_dependencies import get_async_session
+from fastapi import APIRouter, Body, Depends, HTTPException, UploadFile, status
 from services.s3.s3 import s3_storage
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from applications.users.crud import (
-    create_user_in_db,
-    get_user_by_email,
-    activate_user_account,
-)
-from applications.users.schemas import BaseUserInfo, RegisterUserFields
-from database.session_dependencies import get_async_session
 
 products_router = APIRouter()
 
