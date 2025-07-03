@@ -1,8 +1,7 @@
 import math
 
 from applications.products.models import Cart, CartProduct, Product
-from applications.products.schemas import (SearchParamsSchema, SortByEnum,
-                                           SortEnum)
+from applications.products.schemas import SearchParamsSchema, SortByEnum, SortEnum
 from sqlalchemy import and_, asc, desc, func, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 

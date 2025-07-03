@@ -2,12 +2,14 @@ import uuid
 from typing import Annotated
 
 from applications.auth.security import admin_required, get_current_user
-from applications.products.crud import (create_product_in_db,
-                                        get_or_create_cart,
-                                        get_or_create_cart_product,
-                                        get_product_by_pk, get_products_data)
-from applications.products.schemas import (CartSchema, ProductSchema,
-                                           SearchParamsSchema)
+from applications.products.crud import (
+    create_product_in_db,
+    get_or_create_cart,
+    get_or_create_cart_product,
+    get_product_by_pk,
+    get_products_data,
+)
+from applications.products.schemas import CartSchema, ProductSchema, SearchParamsSchema
 from applications.users.models import User
 from database.session_dependencies import get_async_session
 from fastapi import APIRouter, Body, Depends, HTTPException, UploadFile, status
