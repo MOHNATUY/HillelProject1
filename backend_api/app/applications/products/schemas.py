@@ -13,6 +13,20 @@ class ProductSchema(BaseModel):
     images: list[str]
 
 
+class CartProductSchema(BaseModel):
+    price: float
+    quantity: float
+    total: float
+    product: ProductSchema
+
+
+class CartSchema(BaseModel):
+    is_closed: bool
+    user_id: int
+    cost: float
+    cart_products: list[CartProductSchema]
+
+
 class SortEnum(StrEnum):
     ASC = "asc"
     DESC = "desc"

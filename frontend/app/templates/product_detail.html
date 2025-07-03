@@ -12,7 +12,7 @@
 
 
 
-    <img src="{{ product.main_image }}" class="card-img-top" alt="..." width="250px">
+    <img src="{{ product.main_image }}" class="card-img-top" alt="...">
 
       <h5 class="card-title">{{ product.title }}</h5>
       <p class="card-text">{{ product.description }}</p>
@@ -27,7 +27,7 @@
 
     {% for image in product.images %}
     <div class="carousel-item active">
-      <img src="{{ image }}" class="d-block w-50" alt="...">
+      <img src="{{ image }}" class="d-block w-100" alt="...">
     </div>
 
     {% endfor %}
