@@ -44,16 +44,19 @@ async def change_products(
         )
 
     cart_product = await get_or_create_cart_product(product_id, cart.id, session)
-    cart_product.quantity += quantity
-    if cart_product.quantity < 0:
-        cart_product.quantity = 0
 
-    cart_product.price = product.price
+    new_quantity = cart_product.quantity + quantity
 
-    session.add(cart_product)
+    if new_quantity <= 0:
+        await session.delete(cart_product)
+    else:
+        cart_product.quantity = new_quantity
+        cart_product.price = product.price
+        session.add(cart_product)
+
     await session.commit()
+    await session.refresh(cart)
 
-    cart = await get_or_create_cart(user_id=user.id, session=session)
     return cart
 
 
