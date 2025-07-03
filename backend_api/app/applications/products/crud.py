@@ -8,7 +8,9 @@ from applications.products.models import Product
 from applications.products.schemas import SearchParamsSchema, SortEnum, SortByEnum
 
 
-async def create_product_in_db(product_uuid, title, description, price, main_image, images, session) -> Product:
+async def create_product_in_db(
+    product_uuid, title, description, price, main_image, images, session
+) -> Product:
     """
         uuid_data: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4)
 
@@ -41,13 +43,17 @@ async def get_products_data(params: SearchParamsSchema, session: AsyncSession):
         search_fields = [Product.title, Product.description]
         if params.use_sharp_q_filter:
             cleaned_query = params.q.strip().lower()
-            search_condition = [func.lower(search_field) == cleaned_query for search_field in search_fields]
+            search_condition = [
+                func.lower(search_field) == cleaned_query
+                for search_field in search_fields
+            ]
             query = query.filter(or_(*search_condition))
             count_query = count_query.filter(or_(*search_condition))
         else:
             words = [word for word in params.q.strip().split() if len(word) > 1]
             search_condition = or_(
-                and_(*(search_field.icontains(word) for word in words)) for search_field in search_fields
+                and_(*(search_field.icontains(word) for word in words))
+                for search_field in search_fields
             )
             query = query.filter(search_condition)
             count_query = count_query.filter(search_condition)

@@ -25,9 +25,13 @@ async def create_user(
 ) -> BaseUserInfo:
     user = await get_user_by_email(new_user.email, session)
     if user:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="Already exists")
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="Already exists"
+        )
 
-    created_user = await create_user_in_db(new_user.email, new_user.name, new_user.password, session)
+    created_user = await create_user_in_db(
+        new_user.email, new_user.name, new_user.password, session
+    )
     # await rabbitmq_broker.send_message(
     #     message={"name": created_user.name, "email": created_user.email,
     #              'redirect_url': str(request.url_for('verify_user', user_uuid=created_user.uuid_data))
@@ -38,7 +42,9 @@ async def create_user(
         message={
             "name": created_user.name,
             "email": created_user.email,
-            "redirect_url": str(request.url_for("verify_user", user_uuid=created_user.uuid_data)),
+            "redirect_url": str(
+                request.url_for("verify_user", user_uuid=created_user.uuid_data)
+            ),
         },
         queue_name=SupportedQueues.USER_REGISTRATION,
     )
@@ -47,6 +53,8 @@ async def create_user(
 
 
 @router_users.get("/verify/{user_uuid}")
-async def verify_user(user_uuid: uuid.UUID, session: AsyncSession = Depends(get_async_session)):
+async def verify_user(
+    user_uuid: uuid.UUID, session: AsyncSession = Depends(get_async_session)
+):
     await activate_user_account(user_uuid, session)
     return {"Status": "activated"}
