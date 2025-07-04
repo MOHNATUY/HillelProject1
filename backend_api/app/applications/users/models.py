@@ -3,8 +3,10 @@ from datetime import datetime
 
 from database.base_models import Base
 from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column ,relationship
 from sqlalchemy.sql import func
+
+from library.models import ModelCommonMixin
 
 
 class User(Base):
@@ -22,3 +24,11 @@ class User(Base):
     hashed_password: Mapped[str] = mapped_column(nullable=False)
     is_admin: Mapped[bool] = mapped_column(default=False, nullable=True)
     is_verified: Mapped[bool] = mapped_column(default=False, nullable=True)
+
+class Visitors(ModelCommonMixin, Base):
+    __tablename__ = "visitors"
+
+    username: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
+
+    library_items = relationship("Library", back_populates="user", lazy="selectin")
