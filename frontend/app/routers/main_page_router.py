@@ -1,13 +1,6 @@
 from fastapi import APIRouter, Request, Form, Depends, status
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
-from backend_api.api import (
-    get_current_user_with_token,
-    login_user,
-    register_user,
-    get_products,
-    get_product,
-)
 from backend_api.api import add_product_to_cart, remove_product_from_cart
 from backend_api.api import (
     get_current_user_with_token,
