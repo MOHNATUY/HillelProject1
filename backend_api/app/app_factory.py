@@ -3,8 +3,10 @@ from applications.auth.router import router_auth
 from applications.products.router import cart_router, products_router
 from applications.users.router import router_users
 from applications.purchases.router import purchases_router
+from applications.purchases.pay import pay_router
 from fastapi import FastAPI
 from settings import settings
+
 
 sentry_sdk.init(
     dsn=settings.SENTRY,
@@ -19,5 +21,6 @@ def get_application() -> FastAPI:
     app.include_router(products_router, prefix="/products", tags=["Products"])
     app.include_router(cart_router, prefix="/carts", tags=["Cart"])
     app.include_router(purchases_router, prefix="/purchases", tags=["Purchase"])
+    app.include_router(pay_router, prefix="/pay", tags=["Pay"])
 
     return app
