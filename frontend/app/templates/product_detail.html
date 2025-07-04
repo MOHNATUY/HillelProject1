@@ -44,6 +44,13 @@
   </button>
 </div>
 
+<form method="post" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+  <button class="btn btn-success mt-3" type="submit">Add to Cart</button>
+</form>
+
+<form method="post" action="{{ url_for('remove_from_cart', product_id=product.id) }}">
+  <button class="btn btn-danger mt-2" type="submit">Remove from Cart</button>
+</form>
 
 
 

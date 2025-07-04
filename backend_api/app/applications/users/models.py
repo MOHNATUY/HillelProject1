@@ -3,7 +3,7 @@ from datetime import datetime
 
 from database.base_models import Base
 from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 
@@ -22,3 +22,4 @@ class User(Base):
     hashed_password: Mapped[str] = mapped_column(nullable=False)
     is_admin: Mapped[bool] = mapped_column(default=False, nullable=True)
     is_verified: Mapped[bool] = mapped_column(default=False, nullable=True)
+    purchases = relationship("Purchase", back_populates="user")
