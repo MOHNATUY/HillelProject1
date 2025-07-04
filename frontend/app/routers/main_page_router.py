@@ -150,13 +150,3 @@ async def remove_from_cart(
         url=f"/product/{product_id}", status_code=status.HTTP_303_SEE_OTHER
     )
 
-
-@router.get("/cart", name="cart")
-async def cart_page(
-    request: Request, user: dict = Depends(get_current_user_with_token)
-):
-    if not user.get("id"):
-        return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
-    cart_products = await get_cart_products(user["id"])
-    context = {"request": request, "cart_products": cart_products, "user": user}
-    return templates.TemplateResponse("cart.html", context=context)
