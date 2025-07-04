@@ -3,6 +3,39 @@ from settings import settings
 from fastapi import Request
 
 
+async def add_product_to_cart(access_token: str, product_id: int):
+    headers = {"Authorization": f"Bearer {access_token}"}
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            url=f"{settings.BACKEND_API}cart/add/{product_id}",
+            headers=headers,
+        )
+        response.raise_for_status()
+        return response.json()
+
+
+async def remove_product_from_cart(access_token: str, product_id: int):
+    headers = {"Authorization": f"Bearer {access_token}"}
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            url=f"{settings.BACKEND_API}cart/remove/{product_id}",
+            headers=headers,
+        )
+        response.raise_for_status()
+        return response.json()
+
+
+async def get_cart_products(access_token: str):
+    headers = {"Authorization": f"Bearer {access_token}"}
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            url=f"{settings.BACKEND_API}cart",
+            headers=headers,
+        )
+        response.raise_for_status()
+        return response.json()
+
+
 async def login_user(user_email: str, password: str):
     async with httpx.AsyncClient() as client:
         response = await client.post(

@@ -1,7 +1,14 @@
 from fastapi import APIRouter, Request, Form, Depends, status
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
-
+from backend_api.api import (
+    get_current_user_with_token,
+    login_user,
+    register_user,
+    get_products,
+    get_product,
+)
+from backend_api.api import add_product_to_cart, remove_product_from_cart
 from backend_api.api import (
     get_current_user_with_token,
     login_user,
@@ -125,3 +132,38 @@ async def register(
     context["errors"] = [created_user["detail"]]
     response = templates.TemplateResponse("register.html", context=context)
     return response
+
+
+@router.post("/cart/add/{product_id}", name="add_to_cart")
+async def add_to_cart(
+    product_id: int, user: dict = Depends(get_current_user_with_token)
+):
+    if not user.get("id"):
+        return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
+    await add_product_to_cart(user["id"], product_id)
+    return RedirectResponse(
+        url=f"/product/{product_id}", status_code=status.HTTP_303_SEE_OTHER
+    )
+
+
+@router.post("/cart/remove/{product_id}", name="remove_from_cart")
+async def remove_from_cart(
+    product_id: int, user: dict = Depends(get_current_user_with_token)
+):
+    if not user.get("id"):
+        return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
+    await remove_product_from_cart(user["id"], product_id)
+    return RedirectResponse(
+        url=f"/product/{product_id}", status_code=status.HTTP_303_SEE_OTHER
+    )
+
+
+@router.get("/cart", name="cart")
+async def cart_page(
+    request: Request, user: dict = Depends(get_current_user_with_token)
+):
+    if not user.get("id"):
+        return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
+    cart_products = await get_cart_products(user["id"])
+    context = {"request": request, "cart_products": cart_products, "user": user}
+    return templates.TemplateResponse("cart.html", context=context)

@@ -1,12 +1,11 @@
 import sentry_sdk
 from applications.auth.router import router_auth
 from applications.products.router import cart_router, products_router
-from applications.users.router import router_users
-from applications.purchases.router import purchases_router
 from applications.purchases.pay import pay_router
+from applications.purchases.router import purchases_router
+from applications.users.router import router_users
 from fastapi import FastAPI
 from settings import settings
-
 
 sentry_sdk.init(
     dsn=settings.SENTRY,

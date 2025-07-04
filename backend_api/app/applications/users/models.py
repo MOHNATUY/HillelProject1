@@ -1,9 +1,9 @@
 import uuid
 from datetime import datetime
-from sqlalchemy.orm import relationship
+
 from database.base_models import Base
 from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 

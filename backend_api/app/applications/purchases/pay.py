@@ -1,15 +1,16 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
-from applications.users.models import User
-from applications.purchases.models import Purchase
-from applications.products.models import CartProduct
-from applications.auth.security import get_current_user
-from database.session_dependencies import get_async_session
-import sqlalchemy as sa
 from datetime import datetime
 
+import sqlalchemy as sa
+from applications.auth.security import get_current_user
+from applications.products.models import CartProduct
+from applications.purchases.models import Purchase
+from applications.users.models import User
+from database.session_dependencies import get_async_session
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
 
 pay_router = APIRouter()
+
 
 @pay_router.post("/pay")
 async def pay_for_cart(

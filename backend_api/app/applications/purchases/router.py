@@ -1,6 +1,6 @@
 from applications.auth.security import get_current_user
-from applications.purchases.schemas import PurchaseSchema
 from applications.purchases.crud import get_user_purchases
+from applications.purchases.schemas import PurchaseSchema
 from applications.users.models import User
 from database.session_dependencies import get_async_session
 from fastapi import APIRouter, Depends

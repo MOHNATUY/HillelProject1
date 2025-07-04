@@ -1,7 +1,9 @@
-from sqlalchemy import Column, Integer, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
-from database.base_models import Base
 from datetime import datetime
+
+from database.base_models import Base
+from sqlalchemy import Column, DateTime, ForeignKey, Integer
+from sqlalchemy.orm import relationship
+
 
 class Purchase(Base):
     __tablename__ = "purchases"

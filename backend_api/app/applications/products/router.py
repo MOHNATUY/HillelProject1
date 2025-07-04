@@ -49,7 +49,7 @@ async def change_products(
 
     if new_quantity <= 0:
         await session.delete(cart_product)
-    elif new_quantity >=2:
+    elif new_quantity >= 2:
         cart_product.quantity = 1
     else:
         cart_product.quantity = new_quantity
