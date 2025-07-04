@@ -149,4 +149,3 @@ async def remove_from_cart(
     return RedirectResponse(
         url=f"/product/{product_id}", status_code=status.HTTP_303_SEE_OTHER
     )
-
